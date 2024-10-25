@@ -24,7 +24,7 @@ class VideoGenHandler(BaseHandler):
         self._pipeline: Optional[AnimateDiffPipeline] = None
         self._video_gen_preprocessor: Optional[VideoGenPreprocessor] = None
         self._video_gen_postprocessor: Optional[VideoGenPostprocessor] = None
-        self.image: Optional[PIL.Image] = None
+        self.image: Optional[Image.Image] = None
 
     def initialize(self, context):
         logger.debug(
@@ -45,8 +45,8 @@ class VideoGenHandler(BaseHandler):
 
         self._pipeline = model_loader.load_diff_pipeline()
 
-        self._ideo_gen_preprocessor = VideoGenPreprocessor()
-        self._voice_gen_postprocessor = VideoGenPostprocessor()
+        self._video_gen_preprocessor = VideoGenPreprocessor()
+        self._video_gen_postprocessor = VideoGenPostprocessor()
         logger.info("Torchserve backend worker initialized")
 
     def preprocess(self, data: List[dict]):

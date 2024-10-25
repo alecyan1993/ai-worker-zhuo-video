@@ -14,7 +14,8 @@ logger = logging.getLogger(__name__)
 
 class VideoGenPreprocessor:
 
-    def get_image_from_base64(self, image_base64: str, image_format: str = "png"):
+    @staticmethod
+    def get_image_from_base64(image_base64: str):
         """
         Function to generate image from base64
         """
@@ -24,5 +25,5 @@ class VideoGenPreprocessor:
 
         # convert to rgb
         image = image.convert("RGB")
-        return image_io
+        return image
         
