@@ -67,5 +67,5 @@ def test_video_gen():
 
 
     base64_video = VideoGenPostprocessor.convert_frames_to_base64(frames)
-    # base64_to_mp4(base64_video, "output_video.mp4")
+    base64_to_mp4(base64_video, "output_video.mp4")
 
