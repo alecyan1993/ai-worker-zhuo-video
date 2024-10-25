@@ -44,7 +44,7 @@ def test_video_gen():
     image.save(buffered, format="PNG")
     image_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
-    raw_input_data = {"image_base64": image_b64, "width": 1280, "height": 832}
+    raw_input_data = {"image_base64": image_b64}
 
     input_data = VideoGenInput(**raw_input_data)
 
