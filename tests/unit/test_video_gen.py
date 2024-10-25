@@ -63,8 +63,6 @@ def test_video_gen():
         num_inference_steps=input_data.num_inference_steps,
     )
     frames = output.frames[0]
-    export_to_gif(frames, "ex.gif")
-
 
     base64_video = VideoGenPostprocessor.convert_frames_to_base64(frames)
     base64_to_mp4(base64_video, "output_demo_test.mp4")
