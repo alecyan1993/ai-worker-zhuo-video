@@ -19,14 +19,14 @@ from src.preprocessor import VideoGenPreprocessor
 def base64_to_mp4(base64_string, output_path="output_video.mp4"):
     """
     Convert a Base64-encoded string back to an MP4 file.
-    
+
     Args:
         base64_string (str): The Base64-encoded MP4 string.
         output_path (str): The file path to save the MP4 file.
     """
     # 解码 Base64 字符串为二进制数据
     video_data = base64.b64decode(base64_string)
-    
+
     # 将二进制数据写入文件
     with open(output_path, "wb") as video_file:
         video_file.write(video_data)
@@ -44,7 +44,7 @@ def test_video_gen():
     image.save(buffered, format="PNG")
     image_b64 = base64.b64encode(buffered.getvalue()).decode("utf-8")
 
-    raw_input_data = {"image_base64": image_b64}
+    raw_input_data = {"image_base64": image_b64, "width": 1280, "height": 832}
 
     input_data = VideoGenInput(**raw_input_data)
 
@@ -66,4 +66,3 @@ def test_video_gen():
 
     base64_video = VideoGenPostprocessor.convert_frames_to_base64(frames)
     base64_to_mp4(base64_video, "output_demo_test.mp4")
-

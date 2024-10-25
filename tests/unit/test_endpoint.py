@@ -23,7 +23,7 @@ def mp4_to_gif(mp4_path, gif_path="output.gif", fps=10):
     # 使用 OpenCV 读取 MP4 文件
     cap = cv2.VideoCapture(mp4_path)
     frames = []
-    
+
     while True:
         ret, frame = cap.read()
         if not ret:
@@ -31,29 +31,29 @@ def mp4_to_gif(mp4_path, gif_path="output.gif", fps=10):
         # 转换 BGR（OpenCV 默认）为 RGB（PIL 需要）
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frames.append(Image.fromarray(frame_rgb))
-    
+
     cap.release()
-    
+
     # 将帧保存为 GIF
     frames[0].save(
         gif_path,
         save_all=True,
         append_images=frames[1:],
         duration=int(1000 / fps),  # 持续时间是以毫秒为单位
-        loop=0
+        loop=0,
     )
 
 
 def base64_to_mp4(base64_string, output_path="output_video.mp4"):
     """
     Convert a Base64-encoded string back to an MP4 file.
-    
+
     Args:
         base64_string (str): The Base64-encoded MP4 string.
         output_path (str): The file path to save the MP4 file.
     """
     video_data = base64.b64decode(base64_string)
-    
+
     with open(output_path, "wb") as video_file:
         video_file.write(video_data)
 
@@ -78,4 +78,3 @@ def test_endpoint():
     print(f"Length of Base64 video data: {len(base64_video)}")
     base64_to_mp4(base64_video, "output.mp4")
     mp4_to_gif("output.mp4", "output.gif", fps=8)
-

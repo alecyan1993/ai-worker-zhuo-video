@@ -3,7 +3,9 @@ from diffusers import AnimateDiffPipeline, LCMScheduler, MotionAdapter
 from diffusers.utils import export_to_gif, load_image, export_to_video
 
 adapter = MotionAdapter.from_pretrained("wangfuyun/AnimateLCM")
-pipe = AnimateDiffPipeline.from_pretrained("emilianJR/epiCRealism", motion_adapter=adapter)
+pipe = AnimateDiffPipeline.from_pretrained(
+    "emilianJR/epiCRealism", motion_adapter=adapter
+)
 pipe.scheduler = LCMScheduler.from_config(pipe.scheduler.config, beta_schedule="linear")
 
 pipe.load_lora_weights(
@@ -15,7 +17,6 @@ pipe.load_lora_weights(
     "guoyww/animatediff-motion-lora-zoom-out", adapter_name="zoom-out"
 )
 pipe.set_adapters(["lcm-lora", "zoom-out"], [1.0, 0.8])
-
 
 
 pipe.load_ip_adapter(

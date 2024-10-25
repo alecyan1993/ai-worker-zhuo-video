@@ -26,4 +26,3 @@ class VideoGenPreprocessor:
         # convert to rgb
         image = image.convert("RGB")
         return image
-        

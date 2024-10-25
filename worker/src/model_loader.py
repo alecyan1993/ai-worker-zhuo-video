@@ -6,7 +6,6 @@ from diffusers.utils import export_to_gif, load_image, export_to_video
 import torch
 
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -16,8 +15,12 @@ class ModelLoader:
 
     def load_diff_pipeline(self):
         adapter = MotionAdapter.from_pretrained("wangfuyun/AnimateLCM")
-        pipe = AnimateDiffPipeline.from_pretrained("emilianJR/epiCRealism", motion_adapter=adapter)
-        pipe.scheduler = LCMScheduler.from_config(pipe.scheduler.config, beta_schedule="linear")
+        pipe = AnimateDiffPipeline.from_pretrained(
+            "emilianJR/epiCRealism", motion_adapter=adapter
+        )
+        pipe.scheduler = LCMScheduler.from_config(
+            pipe.scheduler.config, beta_schedule="linear"
+        )
 
         pipe.load_lora_weights(
             "wangfuyun/AnimateLCM",
@@ -29,10 +32,10 @@ class ModelLoader:
         )
         pipe.set_adapters(["lcm-lora", "zoom-out"], [1.0, 0.8])
 
-
-
         pipe.load_ip_adapter(
-            "h94/IP-Adapter", subfolder="models", weight_name="ip-adapter-plus_sd15.safetensors"
+            "h94/IP-Adapter",
+            subfolder="models",
+            weight_name="ip-adapter-plus_sd15.safetensors",
         )
 
         pipe.enable_vae_slicing()
