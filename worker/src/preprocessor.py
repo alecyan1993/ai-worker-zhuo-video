@@ -12,7 +12,7 @@ from PIL import Image
 logger = logging.getLogger(__name__)
 
 
-class VoiceGenPreprocessor:
+class VideoGenPreprocessor:
 
     def get_image_from_base64(self, image_base64: str, image_format: str = "png"):
         """
